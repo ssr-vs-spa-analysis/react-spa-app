@@ -28,8 +28,8 @@ export const FeaturedProductsGrid = ({ items, loading, error }: Props) => {
     );
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-      {items.map((item) => (
-        <ProductCard key={item.id} product={item} />
+      {items.map((item, index) => (
+        <ProductCard key={item.id} product={item} priority={index === 0} />
       ))}
     </section>
   );

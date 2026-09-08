@@ -13,11 +13,24 @@ const stockStatusLabels: Record<ProductDetail["stockStatus"], string> = {
 
 export const ProductDetailView = ({ product }: Props) => (
   <section className="grid grid-cols-1 gap-6 rounded-lg border border-slate-200 bg-white p-4 md:grid-cols-2">
-    <StableImage
-      src={product.imageUrl}
-      alt={product.title}
-      className="h-[320px] w-full rounded-md object-cover"
-    />
+    {product.imageUrl ? (
+      <StableImage
+        src={product.imageUrl}
+        alt={product.title}
+        width={640}
+        height={320}
+        priority
+        className="h-[320px] w-full rounded-md object-cover"
+      />
+    ) : (
+      <div
+        className="flex h-[320px] w-full items-center justify-center rounded-md bg-slate-100 text-sm text-slate-500"
+        role="img"
+        aria-label={`${product.title}: nema slike`}
+      >
+        Nema slike
+      </div>
+    )}
     <div>
       <h1 className="text-2xl font-bold text-slate-900">{product.title}</h1>
       <p className="mt-3 text-slate-700">{product.description}</p>

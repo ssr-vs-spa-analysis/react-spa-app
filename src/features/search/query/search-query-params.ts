@@ -25,8 +25,7 @@ const searchParamsSchema = z.object({
   q: z.string().trim().catch(""),
   categories: z.string().trim().optional(),
   brand: z.string().trim().optional(),
-  page: z.coerce.number().int().min(1).catch(1),
-  limit: z.coerce.number().int().min(1).catch(SEARCH_PAGE_LIMIT)
+  page: z.coerce.number().int().min(1).catch(1)
 });
 
 const splitCommaList = (raw: string) =>
@@ -85,15 +84,14 @@ export const parseSearchParams = (search: string): SearchParamsState => {
     q: urlParams.get("q") ?? "",
     categories: urlParams.get("categories") ?? undefined,
     brand: urlParams.get("brand") ?? undefined,
-    page: urlParams.get("page") ?? undefined,
-    limit: urlParams.get("limit") ?? undefined
+    page: urlParams.get("page") ?? undefined
   });
 
   const parsedMin = normalizeMinPrice(urlParams.get("price_min"));
   const parsedMax = normalizeMaxPrice(urlParams.get("price_max"));
   const normalizedRange: [number | null, number | null] =
     parsedMin !== null && parsedMax !== null && parsedMin > parsedMax
-      ? [parsedMin, parsedMin]
+      ? [parsedMax, parsedMin]
       : [parsedMin, parsedMax];
 
   const selectedCategories = params.categories
@@ -132,7 +130,7 @@ export const toSearchParams = (state: SearchParamsState): string => {
       : Math.floor(state.priceRange[1]);
   const normalizedRange: [number | null, number | null] =
     minPrice !== null && maxPrice !== null && minPrice > maxPrice
-      ? [minPrice, minPrice]
+      ? [maxPrice, minPrice]
       : [minPrice, maxPrice];
 
   if (normalizedQuery) params.set("q", normalizedQuery);
@@ -143,7 +141,6 @@ export const toSearchParams = (state: SearchParamsState): string => {
   if (normalizedRange[1] !== null)
     params.set("price_max", String(normalizedRange[1]));
   params.set("page", String(Math.max(1, state.page)));
-  params.set("limit", String(SEARCH_PAGE_LIMIT));
 
   return params.toString();
 };

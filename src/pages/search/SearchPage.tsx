@@ -16,6 +16,8 @@ import {
   toSearchParams
 } from "@/features/search/query/search-query-params";
 
+const SEARCH_DEBOUNCE_MS = 300;
+
 type PaginationItem = number | "ellipsis";
 
 export const SearchPage = () => {
@@ -46,11 +48,12 @@ export const SearchPage = () => {
   );
 
   useEffect(() => {
-    if (searchInput === urlState.searchQuery) return;
+    const trimmedSearchInput = searchInput.trim();
+    if (trimmedSearchInput === urlState.searchQuery) return;
 
     const timeoutId = window.setTimeout(() => {
-      updateSearch({ searchQuery: searchInput });
-    }, 350);
+      updateSearch({ searchQuery: trimmedSearchInput });
+    }, SEARCH_DEBOUNCE_MS);
 
     return () => window.clearTimeout(timeoutId);
   }, [searchInput, updateSearch, urlState.searchQuery]);
@@ -150,7 +153,11 @@ export const SearchPage = () => {
       />
 
       <div className="space-y-4 lg:min-h-0">
-        <div className="hide-scrollbar lg:min-h-[calc(100vh+40px)] lg:max-h-[calc(100vh+40px)] lg:overflow-y-auto lg:pr-2">
+        <div
+          className="hide-scrollbar lg:max-h-[calc(100vh+40px)] lg:min-h-[calc(100vh+40px)] lg:overflow-y-auto lg:pr-2"
+          aria-busy={isLoadingResults}
+          aria-live="polite"
+        >
           <SearchResultsGrid
             items={loaderData.result.items}
             loading={isLoadingResults}
@@ -160,7 +167,10 @@ export const SearchPage = () => {
       </div>
 
       <div className="w-full lg:col-span-2">
-        <div className="flex w-full flex-wrap items-center justify-center gap-2">
+        <nav
+          className="flex w-full flex-wrap items-center justify-center gap-2"
+          aria-label="Paginacija rezultata"
+        >
           <Button
             disabled={currentPage <= 1}
             onClick={() => goToPage(currentPage - 1)}
@@ -205,7 +215,7 @@ export const SearchPage = () => {
           >
             Sledeća strana
           </Button>
-        </div>
+        </nav>
       </div>
     </div>
   );

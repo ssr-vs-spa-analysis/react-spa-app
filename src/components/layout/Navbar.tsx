@@ -7,9 +7,9 @@ export const Navbar = () => (
   <header className="border-b border-slate-200 bg-white">
     <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
       <Link to="/" className="text-lg font-bold text-slate-900">
-        SPA
+        eProdavnica
       </Link>
-      <nav className="flex gap-4">
+      <nav className="flex gap-4" aria-label="Glavna navigacija">
         <NavLink to="/" className={navClass}>
           Početna
         </NavLink>

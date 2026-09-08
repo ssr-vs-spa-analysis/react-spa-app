@@ -51,6 +51,7 @@ export const ProductSearchInput = ({
         <Input
           id={id}
           name={name}
+          aria-label="Pretraga proizvoda"
           value={value}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onChange(event.target.value)

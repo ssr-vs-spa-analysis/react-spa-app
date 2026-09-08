@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 
-type Props = {
-  productId?: string;
-};
-
-export const ProductDetailNotFoundPage = ({ productId }: Props) => (
+export const ProductDetailNotFoundPage = () => (
   <main
     className="mx-auto max-w-2xl px-4 py-16 text-center"
     aria-labelledby="product-not-found-heading"
@@ -19,9 +15,7 @@ export const ProductDetailNotFoundPage = ({ productId }: Props) => (
       Proizvod nije pronađen
     </h1>
     <p className="mt-2 text-slate-600">
-      {productId
-        ? `Nismo mogli da pronađemo proizvod sa id-jem "${productId}".`
-        : "Ovaj proizvod ne postoji ili je link nevažeći."}
+      Ovaj proizvod ne postoji ili je link nevažeći.
     </p>
     <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
       <Link

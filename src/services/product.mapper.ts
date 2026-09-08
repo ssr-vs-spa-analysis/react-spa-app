@@ -4,9 +4,6 @@ import type {
   ProductSummary
 } from "@/types/product.types";
 
-const fallbackImage =
-  "https://images.unsplash.com/vector-1769004080143-f1664190076a?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
 const toPrice = (price: ApiProduct["price"]): number => {
   if (typeof price === "number") return price;
 
@@ -24,7 +21,7 @@ export const mapApiToSummary = (product: ApiProduct): ProductSummary => ({
   id: product.id,
   title: product.name,
   category: product.category,
-  thumbnailUrl: product.images[0] || fallbackImage,
+  thumbnailUrl: product.images[0] ?? "",
   price: toPrice(product.price),
   rating: product.rating
 });
@@ -34,7 +31,7 @@ export const mapApiToDetail = (product: ApiProduct): ProductDetail => ({
   title: product.name,
   description: product.description,
   category: product.category,
-  imageUrl: product.images[0] || fallbackImage,
+  imageUrl: product.images[0] ?? "",
   price: toPrice(product.price),
   brand: product.brand,
   stockStatus: toStock(product.quantity)
