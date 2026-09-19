@@ -3,6 +3,8 @@ import { useLoaderData, useNavigate, useNavigation } from "react-router-dom";
 import { HeroSection } from "@/components/layout/HeroSection";
 import { FeaturedProductsGrid } from "@/components/product/FeaturedProductsGrid";
 import { ProductSearchInput } from "@/components/product/ProductSearchInput";
+import { SeoMetadata } from "@/components/seo/SeoMetadata";
+import { SEO_METADATA } from "@/config/seo-metadata";
 import type { HomeLoaderData } from "@/features/home/loader";
 import {
   DEFAULT_SEARCH_PRICE_RANGE,
@@ -32,6 +34,7 @@ export const HomePage = () => {
 
   return (
     <div className="space-y-6">
+      <SeoMetadata {...SEO_METADATA.home} />
       <HeroSection />
       <ProductSearchInput
         value={searchQuery}

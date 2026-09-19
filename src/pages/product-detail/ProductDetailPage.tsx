@@ -2,7 +2,9 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductDetailSkeleton } from "@/components/product/ProductDetailSkeleton";
 import { ProductDetailView } from "@/components/product/ProductDetailView";
+import { SeoMetadata } from "@/components/seo/SeoMetadata";
 import type { ProductDetailLoaderData } from "@/features/product-detail/loader";
+import { getProductSeoMetadata } from "@/features/product-detail/seo";
 
 export const ProductDetailPage = () => {
   const navigation = useNavigation();
@@ -15,6 +17,7 @@ export const ProductDetailPage = () => {
 
   return (
     <div className="space-y-8">
+      <SeoMetadata {...getProductSeoMetadata(product)} />
       <ProductDetailView product={product} />
       {similarProducts.length > 0 ? (
         <section className="space-y-3" aria-label="Slični proizvodi">

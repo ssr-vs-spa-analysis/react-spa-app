@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run generate:sitemap && tsc -b && vite build",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "test:sitemap": "node --test scripts/generate-sitemap.test.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc -b --pretty false",
-    "format": "prettier \"src/**/*.{ts,tsx,css}\" \"*.{js,json,ts}\" \".github/workflows/**/*.yml\" \"docs/**/*.md\" --write",
-    "format:check": "prettier \"src/**/*.{ts,tsx,css}\" \"*.{js,json,ts}\" \".github/workflows/**/*.yml\" \"docs/**/*.md\" --check",
-    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "format": "prettier \"src/**/*.{ts,tsx,css}\" \"*.{js,json,ts}\" \"scripts/**/*.mjs\" \"docs/**/*.md\" --write",
+    "format:check": "prettier \"src/**/*.{ts,tsx,css}\" \"*.{js,json,ts}\" \"scripts/**/*.mjs\" \"docs/**/*.md\" --check",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test:sitemap",
     "preview": "vite preview"
   },
   "dependencies": {

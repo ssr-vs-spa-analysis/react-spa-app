@@ -35,7 +35,8 @@ export default [
       "node_modules/**",
       "specs/**",
       "temp-app/**",
-      "coverage/**"
+      "coverage/**",
+      "scripts/**"
     ]
   },
   js.configs.recommended,

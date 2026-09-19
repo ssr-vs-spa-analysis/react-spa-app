@@ -8,6 +8,8 @@ import {
 import { ProductSearchInput } from "@/components/product/ProductSearchInput";
 import { SearchFiltersPanel } from "@/components/product/SearchFiltersPanel";
 import { SearchResultsGrid } from "@/components/product/SearchResultsGrid";
+import { SeoMetadata } from "@/components/seo/SeoMetadata";
+import { SEO_METADATA } from "@/config/seo-metadata";
 import { Button } from "@/components/ui/button";
 import type { SearchLoaderData } from "@/features/search/loader";
 import {
@@ -136,6 +138,7 @@ export const SearchPage = () => {
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[20%_80%]">
+      <SeoMetadata {...SEO_METADATA.search} />
       <ProductSearchInput
         value={searchInput}
         onChange={setSearchInput}

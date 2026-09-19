@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { SeoMetadata } from "@/components/seo/SeoMetadata";
+import { SEO_METADATA } from "@/config/seo-metadata";
 
 export const ProductDetailNotFoundPage = () => (
   <main
     className="mx-auto max-w-2xl px-4 py-16 text-center"
     aria-labelledby="product-not-found-heading"
   >
+    <SeoMetadata {...SEO_METADATA.missingProduct} />
     <p className="text-6xl font-bold text-slate-300" aria-hidden="true">
       404
     </p>
